@@ -7,5 +7,33 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	
+	<main>
+		<h1>Liquenes</h1>
+		<p>Bienvenido al espacio dedicado a la divulgación de artículos, publicaciones y revistas biológicas referentes a liquenes.</p>
+
+		<section>
+			<h2>Revistas Recientes</h2>
+			<p>Aquí se mostrarán las últimas publicaciones subidas desde el panel de administración.</p>
+		</section>
+	</main>
+
 </Layout>
+
+<style>
+	main {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 2rem;
+		font-family: system-ui, sans-serif;
+	}
+	h1 {
+		color: #2b6cb0;
+	}
+	section {
+		margin-top: 2rem;
+		padding: 1rem;
+		border: 1px solid #e2e8f0;
+		border-radius: 8px;
+	}
+</style>
