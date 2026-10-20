@@ -1,0 +1,416 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Asignaturas universitarias impartidas por el laboratorio
+const cursosImpartidos = [
+  {
+    titulo: 'Biología de Hongos',
+    nivel: 'Licenciatura en Biología',
+    descripcion: 'Estudio morfológico, anatómico, filogenético y funcional de los grandes grupos fúngicos y sus interacciones simbióticas.',
+    icono: 'hongo'
+  },
+  {
+    titulo: 'Biología Vegetal',
+    nivel: 'Licenciatura en Biología',
+    descripcion: 'Análisis integral de la estructura, diversidad, fisiología y ecología de los organismos vegetales y autótrofos.',
+    icono: 'planta'
+  },
+  {
+    titulo: 'Biogeografía',
+    nivel: 'Licenciatura / Posgrado',
+    descripcion: 'Estudio de los patrones de distribución espacial y temporal de la biodiversidad liquénica y su respuesta al cambio ambiental.',
+    icono: 'globo'
+  }
+];
+
+// Registro cronológico de talleres, seminarios y diplomados
+const colaboraciones = [
+  {
+    anio: '2015',
+    titulo: 'Guía de Parmeliáceas de México (con énfasis en la Península de Yucatán)',
+    institucion: 'Laboratorio de Liquenología, Universidad Nacional Autónoma de México (UNAM)',
+    fecha: '21 – 25 de septiembre de 2015',
+    tipo: 'Taller Especializado'
+  },
+  {
+    anio: '2013',
+    titulo: 'Introducción al conocimiento de los líquenes',
+    institucion: '9ª Semana del Biólogo — Escuela de Biología, Benemérita Universidad Autónoma de Puebla (BUAP)',
+    fecha: '30 de enero de 2013',
+    tipo: 'Seminario & Taller'
+  },
+  {
+    anio: '2011',
+    titulo: 'Tópicos de Ecología y Evaluaciones Liquenológicas',
+    institucion: 'Diplomado de Flora Silvestre Basado en el Desarrollo de Capacidades Técnicas (UAEM / SEMARNAT)',
+    fecha: '10 – 14 de septiembre de 2011',
+    tipo: 'Diplomado de Capacitación'
+  },
+  {
+    anio: '2010',
+    titulo: 'Taller de Identificación y Muestreo de Macrolíquenes Cortícolas',
+    institucion: 'Facultad de Ciencias Biológicas, BUAP',
+    fecha: 'Octubre de 2010',
+    tipo: 'Taller de Campo'
+  }
+];
+---
+
+<Layout title="Docencia | Laboratorio de Liquenología BUAP">
+  
+  <!-- 1. PAGE BANNER -->
+  <section class="page-banner">
+    <div class="container">
+      <span class="banner-tag">Formación Académica y Capacitación</span>
+      <h1>Docencia y Talleres</h1>
+      <p>Cursos universitarios, talleres especializados, seminarios y diplomados impartidos por el laboratorio.</p>
+    </div>
+  </section>
+
+  <!-- 2. CURSOS IMPARTIDOS -->
+  <section class="courses-section">
+    <div class="container">
+      <div class="section-header center">
+        <h2>Cursos Impartidos</h2>
+        <p>Asignaturas curriculares dentro de la Facultad de Ciencias Biológicas de la BUAP.</p>
+      </div>
+
+      <div class="courses-grid">
+        {cursosImpartidos.map((curso) => (
+          <div class="course-card">
+            <div class="course-icon-wrap">
+              {curso.icono === 'hongo' && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2a9 9 0 0 0-9 9c0 1.5.8 2 2 2h14c1.2 0 2-.5 2-2a9 9 0 0 0-9-9Z"/>
+                  <path d="M10 13v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-7"/>
+                  <path d="M7 13c.5 2.5 1.5 5 5 5s4.5-2.5 5-5"/>
+                </svg>
+              )}
+              {curso.icono === 'planta' && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.4 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                  <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+              )}
+              {curso.icono === 'globo' && (
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                  <path d="M2 12h20"/>
+                </svg>
+              )}
+            </div>
+
+            <span class="course-level">{curso.nivel}</span>
+            <h3>{curso.titulo}</h3>
+            <p>{curso.descripcion}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. COLABORACIÓN EN TALLERES, SEMINARIOS Y DIPLOMADOS -->
+  <section class="workshops-section">
+    <div class="container">
+      <div class="section-header left">
+        <h2>Colaboración en Talleres, Seminarios y Diplomados</h2>
+        <p>Capacitación técnica e impartición de talleres institucionales interuniversitarios.</p>
+      </div>
+
+      <div class="workshops-grid">
+        {colaboraciones.map((colab) => (
+          <article class="workshop-card">
+            <div class="workshop-header">
+              <span class="year-badge">{colab.anio}</span>
+              <span class="type-badge">{colab.tipo}</span>
+            </div>
+
+            <div class="workshop-body">
+              <h3>{colab.titulo}</h3>
+              <p class="institution">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                {colab.institucion}
+              </p>
+            </div>
+
+            <div class="workshop-footer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              <span>{colab.fecha}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  :root {
+    --green-dark: #1e4d2b;
+    --green-medium: #2e6f40;
+    --green-soft: #f0fdf4;
+    --orange-accent: #d97706;
+    --orange-hover: #b45309;
+    --text-dark: #1f2937;
+    --text-body: #4b5563;
+    --bg-light: #f8faf8;
+    --border-color: #e5e7eb;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* BANNER */
+  .page-banner {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-medium) 100%);
+    color: #ffffff;
+    padding: 4.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .banner-tag {
+    background-color: rgba(255, 255, 255, 0.18);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .page-banner h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 0.8rem 0;
+  }
+
+  .page-banner p {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  /* ENCABEZADOS DE SECCIÓN */
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-header.center {
+    text-align: center;
+  }
+
+  .section-header.left {
+    text-align: left;
+  }
+
+  .section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--green-dark);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .section-header.center h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--green-medium);
+    margin: 0.6rem auto 0 auto;
+    border-radius: 2px;
+  }
+
+  .section-header.left h2::after {
+    content: '';
+    display: block;
+    width: 45px;
+    height: 3px;
+    background-color: var(--green-medium);
+    margin-top: 0.6rem;
+    border-radius: 2px;
+  }
+
+  .section-header p {
+    color: var(--text-body);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  /* SECCIÓN CURSOS IMPARTIDOS */
+  .courses-section {
+    padding: 5rem 1.5rem;
+    background-color: #ffffff;
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .course-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    border-color: var(--green-medium);
+  }
+
+  .course-icon-wrap {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--green-soft);
+    color: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .course-card:hover .course-icon-wrap {
+    transform: scale(1.1);
+    background-color: var(--green-medium);
+    color: #ffffff;
+  }
+
+  .course-level {
+    background-color: var(--bg-light);
+    color: var(--orange-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    margin-bottom: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .course-card h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin: 0 0 0.85rem 0;
+  }
+
+  .course-card p {
+    font-size: 0.95rem;
+    color: var(--text-body);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* SECCIÓN TALLERES Y SEMINARIOS */
+  .workshops-section {
+    padding: 5rem 1.5rem;
+    background-color: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .workshops-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .workshop-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .workshop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  }
+
+  .workshop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .year-badge {
+    background-color: var(--green-dark);
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+  }
+
+  .type-badge {
+    background-color: var(--green-soft);
+    color: var(--green-medium);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .workshop-body h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 0 0 0.85rem 0;
+    line-height: 1.45;
+  }
+
+  .institution {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-body);
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .institution svg {
+    color: var(--green-medium);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .workshop-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6b7280;
+  }
+
+  .workshop-footer svg {
+    color: var(--orange-accent);
+  }
+</style>
