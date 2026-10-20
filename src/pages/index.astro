@@ -1,111 +1,393 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Datos de prueba (Mock Data) representando artículos subidos por el CMS
-const articulosDestacados = [
+// Galería destacada para acompañar la bienvenida
+const imagenesBienvenidos = [
   {
-    id: 1,
-    titulo: "Diversidad de líquenes epífitos en bosques de pino-encino de Puebla",
-    resumen: "Estudio taxonómico y ecológico sobre las comunidades liquénicas presentes en zonas de alta montaña.",
-    fecha: "Octubre 2026",
-    categoria: "Taxonomía",
-    pdfUrl: "#"
+    url: 'https://images.unsplash.com/photo-1628102491629-778571d893a3?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Detalle macroscópico de liquen foliáceo sobre corteza'
   },
   {
-    id: 2,
-    titulo: "Uso de líquenes como bioindicadores de calidad del aire urbano",
-    resumen: "Evaluación de la acumulación de metales pesados en talos liquénicos dentro de la zona metropolitana.",
-    fecha: "Septiembre 2026",
-    categoria: "Ecología",
-    pdfUrl: "#"
+    url: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Comunidad de líquenes crustosos creciendo en sustrato rocoso'
   },
   {
-    id: 3,
-    titulo: "Análisis filogenético de especies de Usnea en el centro de México",
-    resumen: "Caracterización molecular y morfológica de especímenes conservados en el herbario institucional.",
-    fecha: "Agosto 2026",
-    categoria: "Biología Molecular",
-    pdfUrl: "#"
+    url: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Observación y análisis en microscopio óptico de laboratorio'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=1200&q=80',
+    alt: 'Muestreo de flora liquénica en ecosistema forestal'
+  }
+];
+
+// Publicaciones Recientes (Módulo de Divulgación)
+const ultimasPublicaciones = [
+  {
+    titulo: 'Estructura forestal y su influencia en las comunidades liquénicas cortícolas',
+    resumen: 'Análisis de parámetros ecológicos en bosques mesófilos y templados del centro y sur de México.',
+    fecha: 'Octubre 2026',
+    categoria: 'Ecología Forestal',
+    imagen: 'https://images.unsplash.com/photo-1628102491629-778571d893a3?auto=format&fit=crop&w=600&q=80',
+    alt: 'Detalle macroscópico de liquen foliáceo en corteza',
+    pdfUrl: '#'
+  },
+  {
+    titulo: 'Diversidad y distribución de líquenes en zonas áridas de Tehuacán-Cuicatlán',
+    resumen: 'Estudio taxonómico de especímenes adaptados a condiciones de estrés hídrico extrema.',
+    fecha: 'Septiembre 2026',
+    categoria: 'Taxonomía',
+    imagen: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=600&q=80',
+    alt: 'Líquenes crustosos creciendo en sustrato rocoso',
+    pdfUrl: '#'
+  },
+  {
+    titulo: 'Uso de líquenes epífitos como bioindicadores de calidad del aire urbano',
+    resumen: 'Evaluación de la acumulación de metales pesados en talos liquénicos en zonas metropolitanas.',
+    fecha: 'Agosto 2026',
+    categoria: 'Bioindicadores',
+    imagen: 'https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=600&q=80',
+    alt: 'Comunidad liquénica en ecosistema forestal',
+    pdfUrl: '#'
+  }
+];
+
+// Los 4 pilares principales
+const pilares = [
+  {
+    titulo: 'CONÓCENOS',
+    descripcion: '¿Quién está detrás de liquenes.com? Líneas e integrantes del laboratorio.',
+    enlace: '/conocenos',
+    imagen: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80',
+    alt: 'Equipo de investigación del laboratorio'
+  },
+  {
+    titulo: 'INVESTIGACIÓN',
+    descripcion: 'Proyectos y publicaciones realizadas por el laboratorio de liquenología BUAP.',
+    enlace: '/investigacion',
+    imagen: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80',
+    alt: 'Análisis de laboratorio en microscopía'
+  },
+  {
+    titulo: 'DOCENCIA',
+    descripcion: 'Cursos, colaboración en talleres, seminarios y diplomados.',
+    enlace: '/docencia',
+    imagen: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80',
+    alt: 'Docencia y trabajo de campo'
+  },
+  {
+    titulo: 'TESISTAS',
+    descripcion: 'Tesis terminadas y en proceso, maestría y licenciatura.',
+    enlace: '/tesistas',
+    imagen: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80',
+    alt: 'Muestreo de líquenes en bosque'
   }
 ];
 ---
 
 <Layout title="Líquenes — Laboratorio de Liquenología BUAP">
-  <!-- Sección Principal / Hero -->
+  
+  <!-- BLOQUE 1: HERO PORTADA -->
   <section class="hero">
-    <div class="hero-content">
-      <span class="badge">Investigación y Difusión Científica</span>
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="hero-badge">Facultad de Ciencias Biológicas — BUAP</span>
       <h1>Laboratorio de Liquenología</h1>
       <p>
-        Espacio dedicado al estudio, conservación y divulgación del conocimiento sobre la simbiosis liquénica y su papel en los ecosistemas.
+        Investigación, conservación y divulgación científica sobre la taxonomía y ecología de comunidades liquénicas en México.
       </p>
       <div class="hero-actions">
-        <a href="/investigacion" class="btn btn-primary">Ver Investigaciones</a>
-        <a href="/conocenos" class="btn btn-outline">Conocer el Laboratorio</a>
+        <a href="#bienvenidos" class="btn btn-primary">Conocer el Laboratorio</a>
+        <a href="#divulgacion" class="btn btn-outline">Ver Publicaciones</a>
       </div>
     </div>
   </section>
 
-  <!-- Sección de Artículos Recientes -->
-  <main class="container">
-    <section class="section-header">
-      <h2>Publicaciones Recientes</h2>
-      <p>Artículos de divulgación y avances científicos del laboratorio.</p>
-    </section>
+  <!-- BLOQUE 2: BIENVENIDOS Y GALERÍA CON LIGHTBOX INTERACTIVO -->
+  <section id="bienvenidos" class="welcome-section">
+    <div class="container welcome-grid">
+      <!-- Columna Izquierda: Texto Oficial -->
+      <div class="welcome-text-block">
+        <div class="section-header left">
+          <h2>¡BIENVENIDOS!</h2>
+        </div>
+        <p class="paragraph">
+          La <strong>Taxonomía y Ecología de Líquenes</strong> es una línea de investigación que se viene desarrollando en el laboratorio de <strong>Biología Vegetal</strong> de la Facultad de Ciencias Biológicas.
+        </p>
+        <p class="paragraph">
+          Los estudios se están llevando a cabo en los bosques templados, bosques mesófilos de montaña, selvas tropicales y zonas áridas de los estados de <em>Estado de México, Guerrero, Morelos, Oaxaca, Puebla, Tlaxcala y Veracruz</em>. El objetivo de dichos estudios es tratar de explicar el impacto de la estructura forestal en las comunidades liquénicas, a partir del análisis de algunos parámetros ecológicos.
+        </p>
+        <div class="contact-cta">
+          <span>¿Quieres conocer más sobre liquenes.com?</span>
+          <a href="/contacto" class="link-orange">Contáctanos &rarr;</a>
+        </div>
+      </div>
 
-    <div class="articles-grid">
-      {articulosDestacados.map((articulo) => (
-        <article class="card">
-          <div class="card-tag">{articulo.categoria}</div>
-          <h3 class="card-title">{articulo.titulo}</h3>
-          <p class="card-excerpt">{articulo.resumen}</p>
-          <div class="card-footer">
-            <span class="card-date">{articulo.fecha}</span>
-            <a href={articulo.pdfUrl} class="card-link">Leer artículo &rarr;</a>
-          </div>
-        </article>
-      ))}
+      <!-- Columna Derecha: Mosaico de Imágenes Interactivas -->
+      <div class="welcome-gallery">
+        {imagenesBienvenidos.map((img) => (
+          <button class="gallery-item" aria-label={`Ver imagen: ${img.alt}`}>
+            <img src={img.url} alt={img.alt} loading="lazy" />
+            <span class="gallery-overlay">🔍 Ampliar</span>
+          </button>
+        ))}
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- MODAL / LIGHTBOX PARA VISUALIZACIÓN DE IMAGEN -->
+  <dialog id="image-modal" class="image-modal">
+    <div class="modal-content">
+      <button id="close-modal" class="close-btn" aria-label="Cerrar imagen">&times;</button>
+      <img id="modal-img" src="" alt="" />
+      <p id="modal-caption" class="modal-caption"></p>
+    </div>
+  </dialog>
+
+  <!-- BLOQUE 3: DIVULGACIÓN Y PUBLICACIONES RECIENTES -->
+  <section id="divulgacion" class="publications-section">
+    <div class="container">
+      <div class="section-header center">
+        <h2>Divulgación y Publicaciones Recientes</h2>
+        <p>Artículos científicos, boletines y avances de investigación publicados por el laboratorio.</p>
+      </div>
+
+      <div class="publications-grid">
+        {ultimasPublicaciones.map((pub) => (
+          <article class="pub-card">
+            <div class="pub-image-wrap">
+              <img src={pub.imagen} alt={pub.alt} loading="lazy" />
+              <span class="pub-tag">{pub.categoria}</span>
+            </div>
+            <div class="pub-body">
+              <h4>{pub.titulo}</h4>
+              <p>{pub.resumen}</p>
+              <div class="pub-footer">
+                <span class="pub-date">{pub.fecha}</span>
+                <a href={pub.pdfUrl} class="pub-link">Leer artículo &rarr;</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4: SECCIONES PRINCIPALES (PILARES DEL SITIO) -->
+  <section class="pillars-section">
+    <div class="container">
+      <div class="section-header center">
+        <h2>Secciones Principales</h2>
+        <p>Explora nuestras áreas de trabajo, proyectos docentes y tesis académicas.</p>
+      </div>
+
+      <div class="pillars-grid">
+        {pilares.map((pilar) => (
+          <div class="pillar-card">
+            <div class="card-image-wrap">
+              <img src={pilar.imagen} alt={pilar.alt} loading="lazy" />
+            </div>
+            <div class="card-body">
+              <h3>{pilar.titulo}</h3>
+              <p>{pilar.descripcion}</p>
+              <a href={pilar.enlace} class="btn-click">
+                ¡Da click aquí! &rarr;
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 5: CITA LITERARIA Y SEPARADOR -->
+  <section class="quote-section">
+    <div class="container container-narrow">
+      <blockquote class="quote-box">
+        <p class="quote-text">
+          “A veces, las algas y los hongos se divorcian, por riñas y disputas. Según ellas, ellos las tienen encerradas y no las dejan ver la luz. Según ellos, ellas los empalagan de tanto darles azúcar noche y día.”
+        </p>
+        <cite class="quote-author">- Eduardo Galeano -</cite>
+      </blockquote>
+    </div>
+  </section>
+
 </Layout>
 
+<script>
+  // Lógica del Lightbox para las imágenes de la Galería
+  const modal = document.getElementById('image-modal') as HTMLDialogElement | null;
+  const modalImg = document.getElementById('modal-img') as HTMLImageElement | null;
+  const modalCaption = document.getElementById('modal-caption');
+  const closeModalBtn = document.getElementById('close-modal');
+  const galleryItems = document.querySelectorAll('.gallery-item');
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      if (img && modal && modalImg) {
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+        if (modalCaption) {
+          modalCaption.textContent = img.alt;
+        }
+        modal.showModal();
+      }
+    });
+  });
+
+  // Cerrar al hacer clic en el botón X
+  closeModalBtn?.addEventListener('click', () => {
+    modal?.close();
+  });
+
+  // Cerrar al hacer clic fuera de la imagen (en el backdrop)
+  modal?.addEventListener('click', (event) => {
+    const rect = modal.getBoundingClientRect();
+    const isInDialog = (
+      rect.top <= event.clientY &&
+      event.clientY <= rect.top + rect.height &&
+      rect.left <= event.clientX &&
+      event.clientX <= rect.left + rect.width
+    );
+    
+    // Si el clic ocurrió fuera del cuadro interno del diálogo
+    if (!isInDialog) {
+      modal.close();
+    }
+  });
+</script>
+
 <style>
-  /* Hero Section */
-  .hero {
-    background: linear-gradient(135deg, #1e4d2b 0%, #2e6f40 100%);
-    color: #ffffff;
-    padding: 5rem 1.5rem;
+  :root {
+    --green-dark: #1e4d2b;
+    --green-medium: #2e6f40;
+    --green-soft: #f0fdf4;
+    --orange-accent: #d97706;
+    --orange-hover: #b45309;
+    --text-dark: #1f2937;
+    --text-body: #4b5563;
+    --bg-light: #f8faf8;
+    --border-color: #e5e7eb;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .container-narrow {
+    max-width: 850px;
+  }
+
+  /* ENCABEZADOS DE SECCIÓN */
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header.center {
     text-align: center;
   }
 
-  .hero-content {
-    max-width: 800px;
+  .section-header.left {
+    text-align: left;
+  }
+
+  .section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--green-dark);
+    margin: 0 0 0.6rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-header.center h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--green-medium);
+    margin: 0.6rem auto 0 auto;
+    border-radius: 2px;
+  }
+
+  .section-header.left h2::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 3px;
+    background-color: var(--green-medium);
+    margin-top: 0.6rem;
+    border-radius: 2px;
+  }
+
+  .section-header p {
+    font-size: 1.05rem;
+    color: var(--text-body);
+    margin: 0;
+    max-width: 650px;
+  }
+
+  .section-header.center p {
     margin: 0 auto;
   }
 
-  .badge {
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 0.35rem 0.9rem;
+  /* BLOQUE 1: HERO PORTADA */
+  .hero {
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1511497584788-876761c11969?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    padding: 6.5rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(15, 35, 20, 0.82) 0%, rgba(30, 77, 43, 0.88) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 0.35rem 1rem;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    display: inline-block;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
   }
 
   .hero h1 {
-    font-size: 2.8rem;
+    font-size: 3.1rem;
     font-weight: 800;
     margin: 0 0 1rem 0;
-    line-height: 1.2;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
   }
 
   .hero p {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     line-height: 1.6;
-    opacity: 0.9;
-    margin-bottom: 2rem;
+    opacity: 0.92;
+    margin-bottom: 2.5rem;
   }
 
   .hero-actions {
@@ -116,7 +398,7 @@ const articulosDestacados = [
   }
 
   .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.8rem 1.6rem;
     border-radius: 6px;
     font-weight: 700;
     text-decoration: none;
@@ -125,11 +407,11 @@ const articulosDestacados = [
 
   .btn-primary {
     background-color: #ffffff;
-    color: #2e6f40;
+    color: var(--green-dark);
   }
 
   .btn-primary:hover {
-    background-color: #f0fdf4;
+    background-color: var(--green-soft);
   }
 
   .btn-outline {
@@ -138,100 +420,405 @@ const articulosDestacados = [
   }
 
   .btn-outline:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
   }
 
-  /* Layout Contenedor */
-  .container {
-    max-width: 1200px;
-    margin: 4rem auto;
-    padding: 0 1.5rem;
+  /* BLOQUE 2: BIENVENIDOS & GALERÍA */
+  .welcome-section {
+    padding: 5rem 1.5rem;
+    background-color: #ffffff;
   }
 
-  .section-header {
-    margin-bottom: 2.5rem;
-  }
-
-  .section-header h2 {
-    font-size: 1.8rem;
-    color: #1e4d2b;
-    margin: 0 0 0.5rem 0;
-  }
-
-  .section-header p {
-    color: #6b7280;
-    margin: 0;
-  }
-
-  /* Grid de Tarjetas */
-  .articles-grid {
+  .welcome-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1.2fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .paragraph {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-body);
+    margin-bottom: 1.25rem;
+  }
+
+  .paragraph strong {
+    color: var(--green-dark);
+  }
+
+  .contact-cta {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .link-orange {
+    color: var(--orange-accent);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .link-orange:hover {
+    color: var(--orange-hover);
+    text-decoration: underline;
+  }
+
+  /* MOSAICO DE IMÁGENES INTERACTIVAS */
+  .welcome-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .gallery-item {
+    position: relative;
+    height: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 77, 43, 0.75);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+  }
+
+  .gallery-item:hover .gallery-overlay,
+  .gallery-item:focus .gallery-overlay {
+    opacity: 1;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.08);
+  }
+
+  /* MODAL LIGHTBOX STYLES */
+  .image-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    background: transparent;
+    overflow: visible;
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+
+  .image-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+  }
+
+  .modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #111827;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-content img {
+    max-width: 85vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  .modal-caption {
+    color: #e5e7eb;
+    margin: 0.85rem 0 0 0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    max-width: 80vw;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    background-color: var(--green-medium);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .close-btn:hover {
+    background-color: var(--orange-accent);
+    transform: scale(1.1);
+  }
+
+  /* BLOQUE 3: DIVULGACIÓN Y PUBLICACIONES */
+  .publications-section {
+    padding: 5rem 1.5rem;
+    background-color: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .publications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
   }
 
-  .card {
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
+  .pub-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .pub-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .pub-image-wrap {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .pub-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .pub-card:hover .pub-image-wrap img {
+    transform: scale(1.05);
+  }
+
+  .pub-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: rgba(30, 77, 43, 0.9);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .pub-body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     justify-content: space-between;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-  }
-
-  .card-tag {
-    align-self: flex-start;
-    background-color: #f0fdf4;
-    color: #2e6f40;
-    font-size: 0.75rem;
+  .pub-body h4 {
+    font-size: 1.15rem;
     font-weight: 700;
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-  }
-
-  .card-title {
-    font-size: 1.2rem;
-    color: #1f2937;
+    color: var(--text-dark);
     margin: 0 0 0.75rem 0;
     line-height: 1.4;
   }
 
-  .card-excerpt {
-    font-size: 0.95rem;
-    color: #4b5563;
+  .pub-body p {
+    font-size: 0.92rem;
+    color: var(--text-body);
     line-height: 1.5;
     margin: 0 0 1.5rem 0;
   }
 
-  .card-footer {
+  .pub-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #f3f4f6;
+    border-top: 1px solid var(--border-color);
     padding-top: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 
-  .card-date {
+  .pub-date {
     color: #9ca3af;
   }
 
-  .card-link {
-    color: #2e6f40;
+  .pub-link {
+    color: var(--green-medium);
     font-weight: 700;
     text-decoration: none;
   }
 
-  .card-link:hover {
+  .pub-link:hover {
     text-decoration: underline;
+  }
+
+  /* BLOQUE 4: SECCIONES PRINCIPALES */
+  .pillars-section {
+    padding: 5rem 1.5rem;
+    background-color: #ffffff;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .pillar-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .pillar-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .card-image-wrap {
+    height: 180px;
+    overflow: hidden;
+  }
+
+  .card-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .pillar-card:hover .card-image-wrap img {
+    transform: scale(1.06);
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  .card-body h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin: 0 0 0.75rem 0;
+    letter-spacing: 0.03em;
+  }
+
+  .card-body p {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--text-body);
+    margin: 0 0 1.25rem 0;
+  }
+
+  .btn-click {
+    color: var(--orange-accent);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    align-self: flex-start;
+    transition: color 0.2s ease;
+  }
+
+  .btn-click:hover {
+    color: var(--orange-hover);
+    text-decoration: underline;
+  }
+
+  /* BLOQUE 5: CITA DE EDUARDO GALEANO */
+  .quote-section {
+    padding: 4.5rem 1.5rem;
+    background-color: #f4f7f4;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .quote-box {
+    margin: 0;
+    text-align: center;
+  }
+
+  .quote-text {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.85;
+    color: #2d3748;
+    margin: 0 0 1rem 0;
+  }
+
+  .quote-author {
+    font-family: system-ui, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--green-medium);
+    letter-spacing: 0.05em;
+  }
+
+  /* RESPONSIVO */
+  @media (max-width: 900px) {
+    .welcome-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+    }
   }
 </style>
