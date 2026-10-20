@@ -1,39 +1,237 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Datos de prueba (Mock Data) representando artículos subidos por el CMS
+const articulosDestacados = [
+  {
+    id: 1,
+    titulo: "Diversidad de líquenes epífitos en bosques de pino-encino de Puebla",
+    resumen: "Estudio taxonómico y ecológico sobre las comunidades liquénicas presentes en zonas de alta montaña.",
+    fecha: "Octubre 2026",
+    categoria: "Taxonomía",
+    pdfUrl: "#"
+  },
+  {
+    id: 2,
+    titulo: "Uso de líquenes como bioindicadores de calidad del aire urbano",
+    resumen: "Evaluación de la acumulación de metales pesados en talos liquénicos dentro de la zona metropolitana.",
+    fecha: "Septiembre 2026",
+    categoria: "Ecología",
+    pdfUrl: "#"
+  },
+  {
+    id: 3,
+    titulo: "Análisis filogenético de especies de Usnea en el centro de México",
+    resumen: "Caracterización molecular y morfológica de especímenes conservados en el herbario institucional.",
+    fecha: "Agosto 2026",
+    categoria: "Biología Molecular",
+    pdfUrl: "#"
+  }
+];
 ---
 
-<Layout>
-	
-	<main>
-		<h1>Liquenes</h1>
-		<p>Bienvenido al espacio dedicado a la divulgación de artículos, publicaciones y revistas biológicas referentes a liquenes.</p>
+<Layout title="Líquenes — Laboratorio de Liquenología BUAP">
+  <!-- Sección Principal / Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Investigación y Difusión Científica</span>
+      <h1>Laboratorio de Liquenología</h1>
+      <p>
+        Espacio dedicado al estudio, conservación y divulgación del conocimiento sobre la simbiosis liquénica y su papel en los ecosistemas.
+      </p>
+      <div class="hero-actions">
+        <a href="/investigacion" class="btn btn-primary">Ver Investigaciones</a>
+        <a href="/conocenos" class="btn btn-outline">Conocer el Laboratorio</a>
+      </div>
+    </div>
+  </section>
 
-		<section>
-			<h2>Revistas Recientes</h2>
-			<p>Aquí se mostrarán las últimas publicaciones subidas desde el panel de administración.</p>
-		</section>
-	</main>
+  <!-- Sección de Artículos Recientes -->
+  <main class="container">
+    <section class="section-header">
+      <h2>Publicaciones Recientes</h2>
+      <p>Artículos de divulgación y avances científicos del laboratorio.</p>
+    </section>
 
+    <div class="articles-grid">
+      {articulosDestacados.map((articulo) => (
+        <article class="card">
+          <div class="card-tag">{articulo.categoria}</div>
+          <h3 class="card-title">{articulo.titulo}</h3>
+          <p class="card-excerpt">{articulo.resumen}</p>
+          <div class="card-footer">
+            <span class="card-date">{articulo.fecha}</span>
+            <a href={articulo.pdfUrl} class="card-link">Leer artículo &rarr;</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </main>
 </Layout>
 
 <style>
-	main {
-		max-width: 800px;
-		margin: 0 auto;
-		padding: 2rem;
-		font-family: system-ui, sans-serif;
-	}
-	h1 {
-		color: #2b6cb0;
-	}
-	section {
-		margin-top: 2rem;
-		padding: 1rem;
-		border: 1px solid #e2e8f0;
-		border-radius: 8px;
-	}
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #1e4d2b 0%, #2e6f40 100%);
+    color: #ffffff;
+    padding: 5rem 1.5rem;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: #ffffff;
+    color: #2e6f40;
+  }
+
+  .btn-primary:hover {
+    background-color: #f0fdf4;
+  }
+
+  .btn-outline {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+  }
+
+  .btn-outline:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Layout Contenedor */
+  .container {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+    color: #1e4d2b;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .section-header p {
+    color: #6b7280;
+    margin: 0;
+  }
+
+  /* Grid de Tarjetas */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-tag {
+    align-self: flex-start;
+    background-color: #f0fdf4;
+    color: #2e6f40;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .card-title {
+    font-size: 1.2rem;
+    color: #1f2937;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.4;
+  }
+
+  .card-excerpt {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .card-date {
+    color: #9ca3af;
+  }
+
+  .card-link {
+    color: #2e6f40;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .card-link:hover {
+    text-decoration: underline;
+  }
 </style>
