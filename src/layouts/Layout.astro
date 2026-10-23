@@ -13,6 +13,9 @@ const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.prop
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
@@ -21,8 +24,64 @@ const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.prop
 	<body>
 		<Header />
 		<slot />
+		<footer class="site-footer">
+			<div class="footer-main">
+				<div class="footer-brand">
+					<a href="/" aria-label="Ir al inicio">
+						<img src="/images/logo-liquenes.png" alt="Líquenes · Laboratorio de Liquenología BUAP" />
+					</a>
+					<p>Investigación, conservación y divulgación científica sobre la diversidad liquénica de México.</p>
+				</div>
+				<div class="footer-column">
+					<h2>Explora</h2>
+					<nav aria-label="Navegación del pie de página">
+						<a href="/">Inicio</a>
+						<a href="/conocenos">Conócenos</a>
+						<a href="/investigacion">Investigación</a>
+						<a href="/docencia">Docencia</a>
+						<a href="/tesistas">Tesistas</a>
+					</nav>
+				</div>
+				<div class="footer-column">
+					<h2>Contáctanos</h2>
+					<address>
+						<span>Edificio BIO 1, Ciudad Universitaria</span>
+						<span>Col. San Manuel, Puebla, Pue., México</span>
+						<a href="mailto:liquenologia@correo.buap.mx">liquenologia@correo.buap.mx</a>
+					</address>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<span>© 2026 Laboratorio de Liquenología · BUAP</span>
+				<span>Facultad de Ciencias Biológicas</span>
+			</div>
+		</footer>
 	</body>
 </html>
+
+<script>
+	const revealTargets = document.querySelectorAll(
+		'main > section:not(.hero):not(.contact-hero), .section-shell > *, .wrap > *, .projects > article, .courses > article, .workshops > article, .thesis-grid > article, .book-grid > article, .publication-grid > article, .pillar-grid > a, .post-grid > article'
+	);
+
+	revealTargets.forEach((element, index) => {
+		element.classList.add('reveal-on-scroll');
+		element.style.setProperty('--reveal-delay', `${Math.min(index % 6, 5) * 70}ms`);
+	});
+
+	const revealObserver = new IntersectionObserver(
+		(entries, observer) => {
+			entries.forEach((entry) => {
+				if (!entry.isIntersecting) return;
+				entry.target.classList.add('is-visible');
+				observer.unobserve(entry.target);
+			});
+		},
+		{ threshold: 0.12, rootMargin: '0px 0px -40px' }
+	);
+
+	revealTargets.forEach((element) => revealObserver.observe(element));
+</script>
 
 <style is:global>
 	*, *::before, *::after {
@@ -35,8 +94,179 @@ const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.prop
 		padding: 0;
 		width: 100%;
 		min-height: 100vh;
-		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+		font-family: 'Figtree', system-ui, sans-serif;
 		background-color: #fcfdfc;
 		color: #1f2937;
+	}
+
+	:root {
+		--motion-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	.reveal-on-scroll {
+		opacity: 0;
+		transform: translateY(1.5rem);
+		transition: opacity 700ms var(--motion-ease) var(--reveal-delay, 0ms),
+			transform 700ms var(--motion-ease) var(--reveal-delay, 0ms);
+	}
+
+	.reveal-on-scroll.is-visible {
+		opacity: 1;
+		transform: none;
+	}
+
+	.hero-content, .contact-shell {
+		animation: hero-enter 900ms var(--motion-ease) both;
+	}
+
+	@keyframes hero-enter {
+		from {
+			opacity: 0;
+			transform: translateY(1.25rem);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	a, button, input, textarea {
+		transition-timing-function: var(--motion-ease);
+	}
+
+	button, .button, .filters a {
+		transition: transform 220ms var(--motion-ease), background-color 220ms var(--motion-ease),
+			border-color 220ms var(--motion-ease), color 220ms var(--motion-ease),
+			box-shadow 220ms var(--motion-ease);
+	}
+
+	button:hover, .button:hover, .filters a:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 10px 22px -14px rgba(18, 41, 28, .7);
+	}
+
+	button:active, .button:active, .filters a:active {
+		transform: translateY(-1px) scale(.97);
+		box-shadow: none;
+	}
+
+	button:focus-visible, .button:focus-visible, .filters a:focus-visible {
+		outline: 2px solid #d9a43b;
+		outline-offset: 4px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*, *::before, *::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+			transition-duration: 0.01ms !important;
+		}
+
+		.reveal-on-scroll {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	.site-footer {
+		background: #12291c;
+		color: rgba(255, 255, 255, .72);
+	}
+
+	.footer-main {
+		width: min(1200px, 100%);
+		margin: 0 auto;
+		padding: 4rem 1.5rem 3.5rem;
+		display: grid;
+		grid-template-columns: 1.5fr 1fr 1.2fr;
+		gap: 4rem;
+	}
+
+	.footer-brand img {
+		width: 15rem;
+		height: 6rem;
+		object-fit: contain;
+		object-position: left center;
+		filter: brightness(0) invert(1);
+		opacity: .9;
+	}
+
+	.footer-brand p {
+		max-width: 20rem;
+		margin: 1rem 0 0;
+		color: rgba(255, 255, 255, .62);
+		line-height: 1.6;
+	}
+
+	.footer-column h2 {
+		margin: .25rem 0 1.25rem;
+		color: #c9e265;
+		font: .7rem 'DM Mono', monospace;
+		letter-spacing: .16em;
+		text-transform: uppercase;
+	}
+
+	.footer-column nav,
+	.footer-column address {
+		display: flex;
+		flex-direction: column;
+		gap: .7rem;
+		font-style: normal;
+		line-height: 1.5;
+	}
+
+	.footer-column a {
+		width: fit-content;
+		color: rgba(255, 255, 255, .78);
+		text-decoration: none;
+		transition: color 220ms var(--motion-ease), transform 220ms var(--motion-ease);
+	}
+
+	.footer-column a:hover {
+		transform: translateX(4px);
+		color: #c9e265;
+	}
+
+	.footer-column address a {
+		color: #c9e265;
+		font: .75rem 'DM Mono', monospace;
+		word-break: break-word;
+	}
+
+	.footer-bottom {
+		width: min(1200px, 100%);
+		margin: 0 auto;
+		padding: 1.25rem 1.5rem;
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		border-top: 1px solid rgba(255, 255, 255, .14);
+		color: rgba(255, 255, 255, .48);
+		font: .65rem 'DM Mono', monospace;
+		letter-spacing: .08em;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 760px) {
+		.footer-main {
+			grid-template-columns: 1fr 1fr;
+			gap: 2.5rem;
+		}
+
+		.footer-brand {
+			grid-column: 1 / -1;
+		}
+
+		.footer-bottom {
+			flex-direction: column;
+			gap: .5rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.footer-main {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
