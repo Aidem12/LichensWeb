@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const photos = {
   hero: 'https://images.unsplash.com/photo-1731079067238-4b728b4e6c40?auto=format&fit=crop&w=2000&q=80',
@@ -41,10 +42,10 @@ const posts = [
 ];
 
 const pillars = [
-  ['Conócenos', '¿Quién está detrás de liquenes.com? Líneas e integrantes del laboratorio.', '/conocenos', photos.branch, 'Conoce al equipo del laboratorio'],
-  ['Investigación', 'Proyectos y publicaciones realizadas por el laboratorio de liquenología BUAP.', '/investigacion', photos.forest, 'Investigación en campo'],
-  ['Docencia', 'Cursos, colaboración en talleres, seminarios y diplomados.', '/docencia', photos.moss, 'Musgo y liquen sobre un tronco'],
-  ['Tesistas', 'Tesis terminadas y en proceso, maestría y licenciatura.', '/tesistas', photos.tall, 'Muestreo de flora liquénica'],
+  ['Conócenos', '¿Quién está detrás de liquenes.com? Líneas e integrantes del laboratorio.', `${base}/conocenos`, photos.branch, 'Conoce al equipo del laboratorio'],
+  ['Investigación', 'Proyectos y publicaciones realizadas por el laboratorio de liquenología BUAP.', `${base}/investigacion`, photos.forest, 'Investigación en campo'],
+  ['Docencia', 'Cursos, colaboración en talleres, seminarios y diplomados.', `${base}/docencia`, photos.moss, 'Musgo y liquen sobre un tronco'],
+  ['Tesistas', 'Tesis terminadas y en proceso, maestría y licenciatura.', `${base}/tesistas`, photos.tall, 'Muestreo de flora liquénica'],
 ];
 ---
 
@@ -70,7 +71,7 @@ const pillars = [
         <div class="rule"></div>
         <p class="lead">La <strong>Taxonomía y Ecología de Líquenes</strong> es una línea de investigación que se viene desarrollando en el laboratorio de <strong>Biología Vegetal</strong> de la Facultad de Ciencias Biológicas.</p>
         <p>Los estudios se están llevando a cabo en los bosques templados, bosques mesófilos de montaña, selvas tropicales y zonas áridas de los estados de <em>Estado de México, Guerrero, Morelos, Oaxaca, Puebla, Tlaxcala y Veracruz</em>. El objetivo es explicar el impacto de la estructura forestal en las comunidades liquénicas, a partir del análisis de algunos parámetros ecológicos.</p>
-        <p class="contact-line">¿Quieres conocer más sobre liquenes.com? <a href="/contacto">Contáctanos →</a></p>
+        <p class="contact-line">¿Quieres conocer más sobre liquenes.com? <a href={`${base}/contacto`}>Contáctanos →</a></p>
       </div>
       <div class="gallery">
         {[ [photos.yellow, 'Liquen amarillo sobre corteza'], [photos.fog, 'Bosque templado con niebla'], [photos.moss, 'Superficie musgosa en el bosque'], [photos.tall, 'Muestra de flora liquénica'] ].map(([src, alt], index) => (
@@ -98,7 +99,7 @@ const pillars = [
                 <small>{post.date}</small>
                 <h3>{post.title}</h3>
                 <p>{post.text}</p>
-                <a href="/investigacion">Leer artículo →</a>
+                <a href={`${base}/investigacion`}>Leer artículo →</a>
               </div>
             </article>
           ))}

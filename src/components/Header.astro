@@ -1,20 +1,21 @@
 ---
 const currentPath = Astro.url.pathname;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const navItems = [
-  { name: 'INICIO', href: '/' },
-  { name: 'CONÓCENOS', href: '/conocenos' },
-  { name: 'INVESTIGACIÓN', href: '/investigacion' },
-  { name: 'DOCENCIA', href: '/docencia' },
-  { name: 'TESISTAS', href: '/tesistas' },
-  { name: 'CONTÁCTANOS', href: '/contacto' },
+  { name: 'INICIO', href: `${base}/` },
+  { name: 'CONÓCENOS', href: `${base}/conocenos` },
+  { name: 'INVESTIGACIÓN', href: `${base}/investigacion` },
+  { name: 'DOCENCIA', href: `${base}/docencia` },
+  { name: 'TESISTAS', href: `${base}/tesistas` },
+  { name: 'CONTÁCTANOS', href: `${base}/contacto` },
 ];
 ---
 
 <header class="header">
   <div class="header-container">
-    <a href="/" class="brand">
-      <img class="brand-logo" src="/images/logo-liquenes.png" alt="Líquenes · Laboratorio de Liquenología BUAP" />
+    <a href={`${base}/`} class="brand">
+      <img class="brand-logo" src={`${base}/images/logo-liquenes.png`} alt="Líquenes · Laboratorio de Liquenología BUAP" />
     </a>
 
     <!-- Botón Menú Móvil -->
@@ -31,7 +32,7 @@ const navItems = [
           <li>
             <a 
               href={item.href} 
-              class={currentPath === item.href ? 'active' : ''}
+              class={currentPath === item.href || (item.href !== `${base}/` && currentPath === `${item.href}/`) ? 'active' : ''}
             >
               {item.name}
             </a>

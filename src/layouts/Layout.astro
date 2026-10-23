@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <!doctype html>
@@ -16,8 +17,8 @@ const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.prop
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&display=swap" rel="stylesheet" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+		<link rel="icon" href={`${base}/favicon.ico`} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
@@ -27,19 +28,19 @@ const { title = "Líquenes — Laboratorio de Liquenología BUAP" } = Astro.prop
 		<footer class="site-footer">
 			<div class="footer-main">
 				<div class="footer-brand">
-					<a href="/" aria-label="Ir al inicio">
-						<img src="/images/logo-liquenes.png" alt="Líquenes · Laboratorio de Liquenología BUAP" />
+					<a href={`${base}/`} aria-label="Ir al inicio">
+						<img src={`${base}/images/logo-liquenes.png`} alt="Líquenes · Laboratorio de Liquenología BUAP" />
 					</a>
 					<p>Investigación, conservación y divulgación científica sobre la diversidad liquénica de México.</p>
 				</div>
 				<div class="footer-column">
 					<h2>Explora</h2>
 					<nav aria-label="Navegación del pie de página">
-						<a href="/">Inicio</a>
-						<a href="/conocenos">Conócenos</a>
-						<a href="/investigacion">Investigación</a>
-						<a href="/docencia">Docencia</a>
-						<a href="/tesistas">Tesistas</a>
+						<a href={`${base}/`}>Inicio</a>
+						<a href={`${base}/conocenos`}>Conócenos</a>
+						<a href={`${base}/investigacion`}>Investigación</a>
+						<a href={`${base}/docencia`}>Docencia</a>
+						<a href={`${base}/tesistas`}>Tesistas</a>
 					</nav>
 				</div>
 				<div class="footer-column">
